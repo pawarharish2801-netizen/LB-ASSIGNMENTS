@@ -1,6 +1,7 @@
 //QUESTION 4
 
 #include <stdio.h>
+#include <stdbool.h>
 bool Check(int iNo)
 {
     if ((iNo % 5) ==0)
@@ -31,4 +32,5 @@ int main()
     }
     
     return 0 ;
+
 }
