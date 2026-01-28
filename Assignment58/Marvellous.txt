@@ -1,0 +1,346 @@
+========== Bhau.txt ==========
+import java.util.Scanner;import java.io.File; import java.io.FileWriter;import java.lang.Exception;class Q1{    public static void main(String A[])    {        String str = null ;        Scanner sobj = new Scanner(System.in);        System.out.println("Enter First File Name : ");        String F1 = sobj.nextLine();        System.out.println("Enter Second File Name : ");        String F2 = sobj.nextLine();        try         {            File FileSource = new File(F1);            File FileDest = new File(F2)
+
+========== Demo.txt ==========
+import java.util.Scanner;
+import java.io.File; 
+import java.io.FileWriter;
+
+class Q1
+{
+    public static void main(String A[])
+    {
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter First File Name: ");
+        String F1 = sobj.nextLine();
+
+        System.out.println("Enter Second File Name: ");
+        String F2 = sobj.nextLine();
+
+        try 
+        {
+            File FileSource = new File(F1);
+            File FileDest = new File(F2); 
+
+            Scanner FileReader = new Scanner(FileSource);
+            FileWriter fileWriter = new FileWriter(FileDest);
+
+            while (FileReader.hasNextLine() == true)  
+            {
+                String str = FileReader.nextLine();
+                fileWriter.write(str);
+                fileWriter.write("\n");
+            }
+            
+            FileReader.close();
+            fileWriter.close();
+            
+            System.out.println("File Copied Successfully.");
+        }
+        catch (Exception eobj)
+        {
+            System.out.println("Error: " + eobj.getMessage());
+        }
+
+        sobj.close();
+    }
+}
+
+
+========== Q1.java ==========
+import java.util.Scanner;
+import java.io.File; 
+import java.io.FileWriter;
+
+class Q1
+{
+    public static void main(String A[])
+    {
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter First File Name: ");
+        String F1 = sobj.nextLine();
+
+        System.out.println("Enter Second File Name: ");
+        String F2 = sobj.nextLine();
+
+        try 
+        {
+            File FileSource = new File(F1);
+            File FileDest = new File(F2); 
+
+            Scanner FileReader = new Scanner(FileSource);
+            FileWriter fileWriter = new FileWriter(FileDest);
+
+            while (FileReader.hasNextLine() == true)  
+            {
+                String str = FileReader.nextLine();
+                fileWriter.write(str);
+                fileWriter.write("\n");
+            }
+            
+            FileReader.close();
+            fileWriter.close();
+            
+            System.out.println("File Copied Successfully.");
+        }
+        catch (Exception eobj)
+        {
+            System.out.println("Error: " + eobj.getMessage());
+        }
+
+        sobj.close();
+    }
+}
+
+========== Q2.java ==========
+import java.util.Scanner;
+import java.nio.file.Files ;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+
+class Q1
+{
+    public static void main(String A[])
+    {
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter File Name: ");
+        String F1 = sobj.nextLine();
+
+        Path path = Paths.get(F1);
+
+        boolean bRet = false ;
+        bRet = Files.isRegularFile(path);
+
+        if (bRet == true)
+        {
+            System.out.println("The File is Regular File");
+        }
+        else
+        {
+            System.out.println("The File is not Regular File");
+        }
+    }
+}
+
+========== Q3.java ==========
+import java.util.Scanner;
+import java.nio.file.Files ;
+import java.nio.file.Paths;
+import java.nio.file.Path; 
+
+public class Q3 
+{
+    public static void main(String[] args) 
+    {
+        System.out.println("Enter Directory Name ");
+        Scanner sobj = new Scanner(System.in);
+        
+        String DirName = sobj.nextLine();
+
+        Path path = Paths.get(DirName);
+        try 
+        {
+           Files.createDirectories(path);
+           System.out.println(" File Successfully Created at : "+ path.toAbsolutePath());
+        }
+        catch(Exception eobj)
+        {
+            System.out.println("Error : " + eobj.getLocalizedMessage());
+        }
+       
+        sobj.close();
+
+    
+
+    }    
+}
+
+
+========== Q4.java ==========
+import java.util.Scanner;
+import java.io.FileInputStream;
+import java.security.MessageDigest;
+
+public class Q4 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sobj = new Scanner(System.in);
+        
+        System.out.println("Enter File Name: ");
+        String fileName = sobj.nextLine();
+        
+        try 
+        {
+            // Create FileInputStream to read file
+            FileInputStream fis = new FileInputStream(fileName);
+            
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            
+            // Read file in chunks
+            byte[] byteArray = new byte[1024];
+            int bytesRead = 0;
+            
+            while ((bytesRead = fis.read(byteArray)) != -1) 
+            {
+                md.update(byteArray, 0, bytesRead);
+            }
+            
+            fis.close();
+            
+            // Get the hash's bytes
+            byte[] digest = md.digest();
+            
+            // Convert bytes to hexadecimal format
+            StringBuilder checksum = new StringBuilder();
+            for (byte b : digest) 
+            {
+                checksum.append(String.format("%02x", b));
+            }
+            
+            System.out.println("Checksum (MD5): " + checksum.toString());
+        }
+        catch (Exception eobj) 
+        {
+            System.out.println("Error: " + eobj.getMessage());
+        }
+        
+        sobj.close();
+    }
+}
+
+========== Q5.java ==========
+import java.util.Scanner;
+import java.nio.file.Files ;
+import java.nio.file.Paths;
+import java.nio.file.Path; 
+import java.io.File;
+
+public class Q5
+{
+    public static void main(String[] args) 
+    {
+        System.out.println("Enter Directory Name ");
+        Scanner sobj = new Scanner(System.in);
+        
+        String DirName = sobj.nextLine();
+
+        try 
+        {
+           File file = new File(DirName);
+
+           File[] fileArr = file.listFiles();
+
+           for (int i = 0 ; i<fileArr.length ;i++ )
+           {
+                String str = fileArr[i].getName();
+                long size = fileArr[i].length();
+                System.out.print(str +"            :  " + size + "bytes");
+                System.out.println();
+           }
+
+        }
+        catch(Exception eobj)
+        {
+            System.out.println("Error : " + eobj.getLocalizedMessage());
+        }
+       
+        sobj.close();
+
+    
+
+    }    
+}
+
+
+========== Ques1.java ==========
+import java.util.Scanner;
+import java.io.File; 
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+class Q1
+{
+    public static void main(String A[])
+    {
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter First File Name: ");
+        String F1 = sobj.nextLine();
+
+        System.out.println("Enter Second File Name: ");
+        String F2 = sobj.nextLine();
+        
+        try 
+        {
+            File FileSource = new File(F1);
+            File FileDest = new File(F2); 
+
+            Path Path1 = Paths.get(F1) ;
+            Path Path2 = Paths.get(F2) ;
+
+            Files.copy(Path1, Path2);
+            
+            System.out.println("File Copied Successfully.");
+        }
+        catch (Exception eobj)
+        {
+            System.out.println("Error: " + eobj.getMessage());
+        }
+
+        sobj.close();
+    }
+}
+
+========== S.txt ==========
+import java.util.Scanner;
+import java.io.File; 
+import java.io.FileWriter;
+
+class Q1
+{
+    public static void main(String A[])
+    {
+        Scanner sobj = new Scanner(System.in);
+
+        System.out.println("Enter First File Name: ");
+        String F1 = sobj.nextLine();
+
+        System.out.println("Enter Second File Name: ");
+        String F2 = sobj.nextLine();
+
+        try 
+        {
+            File FileSource = new File(F1);
+            File FileDest = new File(F2); 
+
+            Scanner FileReader = new Scanner(FileSource);
+            FileWriter fileWriter = new FileWriter(FileDest);
+
+            while (FileReader.hasNextLine() == true)  
+            {
+                String str = FileReader.nextLine();
+                fileWriter.write(str);
+                fileWriter.write("\n");
+            }
+            
+            FileReader.close();
+            fileWriter.close();
+            
+            System.out.println("File Copied Successfully.");
+        }
+        catch (Exception eobj)
+        {
+            System.out.println("Error: " + eobj.getMessage());
+        }
+
+        sobj.close();
+    }
+}
+
