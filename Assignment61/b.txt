@@ -1,0 +1,49 @@
+import java.util.*;
+import java.io.*;
+
+public class Q2
+{
+    public static void main(String[] args) throws Exception
+    {
+        Scanner sobj = new Scanner(System.in);
+        String FileSourceName = null;
+        String FileDestName = null;
+        File fobjsource = null;
+        File fobjdest = null;
+        byte b[] = new byte[1024];
+        int bytesRead = 0;
+
+        System.out.println("Enter the Source File Name");
+        FileSourceName = sobj.nextLine();
+        fobjsource = new File(FileSourceName);
+
+        System.out.println("Enter the Destination File Name");
+        FileDestName = sobj.nextLine();
+
+        if (fobjsource.exists())
+        {
+            fobjdest = new File(FileDestName);
+            fobjdest.createNewFile();
+
+            FileInputStream fiobj = new FileInputStream(fobjsource);
+            FileOutputStream foobj = new FileOutputStream(fobjdest);
+
+            while ((bytesRead = fiobj.read(b)) != -1)
+            {
+                foobj.write(b, 0, bytesRead);
+            }
+
+            System.out.println("File Copied Successfully!");
+            
+            // Close streams
+            fiobj.close();
+            foobj.close();
+        }
+        else
+        {
+            System.out.println("Source File Doesn't Exist");
+        }
+        
+        sobj.close();
+    }
+}
